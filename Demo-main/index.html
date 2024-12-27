@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAA LSG</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            background-image: url('Screenshot 2024-11-28 210307.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            text-align: center;
+            color: #ffc107;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav {
+            display: none;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 10px;
+        }
+
+        nav a {
+            color: #ffc107;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .container {
+            text-align: center;
+            padding: 50px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .visible {
+            display: block;
+        }
+
+        .login-page, .attendance-page, .borrow-page, .event-page, .lost-page {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        input, button, textarea {
+            display: block;
+            margin: 15px auto;
+            padding: 10px;
+            width: 80%;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            background-color: #ffc107;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e0a800;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 50px;
+            background-color: rgba(218, 210, 210, 0.8);
+            color: #fff;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+    <script>
+        // Login validation
+        function login() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            const loginResult = document.getElementById('loginResult');
+            if (username === "user" && password === "12345") {
+                loginResult.textContent = "Login successful!";
+                loginResult.style.color = "green";
+
+                // Show navigation and default to Attendance page
+                document.querySelector('nav').style.display = "flex";
+                showPage('attendance');
+            } else {
+                loginResult.textContent = "Invalid username or password!";
+                loginResult.style.color = "red";
+            }
+        }
+<style>
+    /* ... existing styles ... */
+
+    header {
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 15px;
+        text-align: center;
+    }
+
+    .header-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header-content img {
+        max-width: 100px;
+        height: auto;
+    }
+
+    .header-text {
+        color: #ffc107;
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    /* ... rest of the styles ... */
+</style>
+       
+        function showPage(page) {
+            document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
+            document.querySelector(`.${page}-page`).classList.remove('hidden');
+        }
+
+    
+        function checkAttendance() {
+            const inputId = document.getElementById('attendanceId').value.trim();
+            const resultDiv = document.getElementById('attendanceResult');
+            resultDiv.textContent = `Student with Attendance ID ${inputId} is marked as Present.`;
+            resultDiv.style.color = 'green';
+        }
+
+        function borrowItem() {
+            const itemName = document.getElementById('borrowItemName').value.trim();
+            const resultDiv = document.getElementById('borrowResult');
+            resultDiv.textContent = `The item "${itemName}" has been borrowed.`;
+            resultDiv.style.color = 'green';
+            document.getElementById('borrowItemName').value = '';
+        }
+
+       
+        function addEvent() {
+            const eventName = document.getElementById('eventName').value.trim();
+            const eventDate = document.getElementById('eventDate').value;
+            const resultDiv = document.getElementById('eventResult');
+
+            if (eventName && eventDate) {
+                resultDiv.textContent = `The event "${eventName}" is scheduled for ${eventDate}.`;
+                resultDiv.style.color = 'green';
+            } else {
+                resultDiv.textContent = "Please enter both the event name and the date.";
+                resultDiv.style.color = 'red';
+            }
+
+            document.getElementById('eventName').value = '';
+            document.getElementById('eventDate').value = '';
+        }
+
+     
+        function reportLostItem() {
+            const lostItemName = document.getElementById('lostItemName').value.trim();
+            const resultDiv = document.getElementById('lostItemResult');
+            resultDiv.textContent = `The item "${lostItemName}" was lost but is now received.`;
+            resultDiv.style.color = 'green';
+            document.getElementById('lostItemName').value = '';
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="caa-removebg-preview.png" alt="Logo">
+            <span>CAA LSG</span>
+        </div>
+    </header>
+
+    <nav>
+        <a href="#" onclick="showPage('attendance')">Attendance</a>
+        <a href="#" onclick="showPage('borrow')">Borrow System</a>
+        <a href="#" onclick="showPage('event')">Event Management</a>
+        <a href="#" onclick="showPage('lost')">Lost and Found</a>
+    </nav>
+
+    <div class="container">
+        <!-- Login Page -->
+        <div class="page login-page enable">
+            <h1>Login</h1>
+            <input id="username" type="text" placeholder="User Name">
+            <input id="password" type="password" placeholder="Password">
+            <button onclick="login()">Login</button>
+            <div id="loginResult" class="result"></div>
+        </div>
+
+        <!-- Attendance Page -->
+        <div class="page attendance-page hidden">
+            <h1>Check Attendance</h1>
+            <input id="attendanceId" type="text" placeholder="Enter Attendance ID">
+            <button onclick="checkAttendance()">Check Attendance</button>
+            <div id="attendanceResult" class="result"></div>
+        </div>
+
+ 
+        <div class="page borrow-page hidden">
+            <h1>Borrow System</h1>
+            <input id="borrowItemName" type="text" placeholder="Enter Item Name">
+            <button onclick="borrowItem()">Borrow Item</button>
+            <div id="borrowResult" class="result"></div>
+        </div>
+
+        <!-- Event Management Page -->
+        <div class="page event-page hidden">
+            <h1>Event Management</h1>
+            <input id="eventName" type="text" placeholder="Enter Event Name">
+            <input id="eventDate" type="date" placeholder="Enter Event Date">
+            <button onclick="addEvent()">Add Event</button>
+            <div id="eventResult" class="result"></div>
+        </div>
+
+        <!-- Lost and Found Page -->
+        <div class="page lost-page hidden">
+            <h1>Lost and Found</h1>
+            <input id="lostItemName" type="text" placeholder="Enter Lost Item Name">
+            <button onclick="reportLostItem()">Report Item</button>
+            <div id="lostItemResult" class="result"></div>
+        </div>
+    </div>
+
+    <footer></footer>
+</body>
+</html>
